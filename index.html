@@ -523,7 +523,7 @@
 
     .oneoff-esg .esg-hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: clamp(20px, 4vw, 36px);
       align-items: start;
       justify-items: stretch;
@@ -691,7 +691,8 @@
     }
 
     .oneoff-esg .stat-card {
-      width: min(560px, 100%);
+      width: 100%;
+      max-width: 720px;
       background: linear-gradient(180deg, #ffffff 0%, #f1f6ff 100%);
       border: 1px solid var(--line);
       border-radius: 26px;
