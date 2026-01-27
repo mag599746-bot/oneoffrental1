@@ -1109,12 +1109,10 @@
     }
 
     .oneoff-esg .esgx-hero-shell {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.82) 100%),
-        url("assets/fffff.png") center / cover no-repeat;
-      border: 1px solid rgba(10, 20, 40, 0.06);
-      border-radius: calc(var(--esg-radius) + 8px);
-      box-shadow: var(--esg-shadow);
+      background: none;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
       overflow: hidden;
       position: relative;
       width: 100%;
@@ -1122,14 +1120,7 @@
     }
 
     .oneoff-esg .esgx-hero-shell::before {
-      content: "";
-      position: absolute;
-      inset: -120px -120px auto auto;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle at 30% 30%, rgba(47, 107, 255, 0.28), rgba(78, 224, 197, 0.18) 45%, rgba(255, 255, 255, 0) 70%);
-      filter: blur(2px);
-      pointer-events: none;
+      content: none;
     }
 
     .oneoff-esg .esgx-hero-grid {
@@ -1265,7 +1256,15 @@
     }
 
     .oneoff-esg .esgx-hero-visual {
-      display: none;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .oneoff-esg .esgx-hero-image {
+      width: min(900px, 100%);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 24px 60px rgba(10, 20, 40, 0.22));
     }
 
     .oneoff-esg .esgx-statement {
@@ -1780,7 +1779,9 @@
                   </div>
                 </div>
 
-                <div class="esgx-hero-visual" aria-hidden="true"></div>
+                <div class="esgx-hero-visual">
+                  <img class="esgx-hero-image" src="assets/fffff.png" alt="LED 화면 이미지" />
+                </div>
               </div>
             </div>
           </section>
