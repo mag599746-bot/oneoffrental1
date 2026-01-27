@@ -850,7 +850,7 @@
     .oneoff-esg .esg-cards {
       margin-top: 18px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -1263,19 +1263,17 @@
                 출력물 없는 전시는 <span class="hl hl--yellow">폐기물이 없는 전시</span>입니다.
               </h2>
               <p class="esg-subtitle">
-                LED 전시 전환은 <b>디자인 변화</b>가 아니라 <b>전시 구조의 친환경 전환</b>입니다.
-                목공·현수막·출력물을 줄이고, 콘텐츠는 디지털로 교체하여 <b>폐기물/자원낭비</b>를 낮춥니다.
+                LED 전시는 <b>전시 구조를 단순화</b>하고 <b>폐기물</b>을 줄입니다.
               </p>
 
               <div class="esg-cta">
-                <a class="btn btn--primary" href="#esg-table">근거 기반 정리표 보기</a>
+                <a class="btn btn--primary" href="#esg-table">정리표 보기</a>
                 <a class="btn btn--ghost" href="#contact">상담 요청</a>
               </div>
 
               <ul class="esg-bullets">
-                <li><span class="dot dot--yellow"></span> PVC 현수막·배너 폐기물 감축</li>
-                <li><span class="dot dot--purple"></span> 반복 출력(재제작) 감소 → 자원 절감</li>
-                <li><span class="dot dot--yellow"></span> 렌탈 기반 반복 사용 → 지속가능한 운영 구조</li>
+                <li><span class="dot dot--yellow"></span> 출력물·목공 사용 최소화</li>
+                <li><span class="dot dot--purple"></span> 콘텐츠 교체 중심 운영</li>
               </ul>
             </div>
 
@@ -1285,124 +1283,42 @@
                   <span class="badge badge--purple">핵심 메시지</span>
                   <span class="badge badge--yellow">전시 폐기물 ↓</span>
                 </div>
-                <p class="stat-quote">“콘텐츠는 바꾸고, 쓰레기는 남기지 않습니다.”</p>
+                <p class="stat-quote">“콘텐츠는 바꾸고, 폐기물은 줄입니다.”</p>
                 <div class="stat-grid">
                   <div class="stat-item">
                     <p class="stat-label">대체 대상</p>
                     <p class="stat-value">목공 · 현수막 · 출력물</p>
                   </div>
                   <div class="stat-item">
-                    <p class="stat-label">대체 방식</p>
+                    <p class="stat-label">전환 방식</p>
                     <p class="stat-value">LED 스크린 · 디지털 콘텐츠</p>
-                  </div>
-                  <div class="stat-item">
-                    <p class="stat-label">ESG 포인트</p>
-                    <p class="stat-value">폐기물·자원낭비 감축</p>
-                  </div>
-                  <div class="stat-item">
-                    <p class="stat-label">관리 포인트</p>
-                    <p class="stat-value">밝기·가동시간·전력관리</p>
                   </div>
                 </div>
               </div>
             </div>
           </header>
 
-          <!-- 전/후 비교 -->
-          <section class="esg-compare" aria-label="전/후 비교">
-            <div class="compare-card compare-card--print">
-              <div class="compare-head">
-                <div class="compare-icon" aria-hidden="true">
-                  <!-- trash icon -->
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M10 11v7M14 11v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M6 7l1 14h10l1-14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M9 7V4h6v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="compare-k">출력물 기반 전시</p>
-                  <p class="compare-t">현수막·시트지·목공 패널 중심</p>
-                </div>
-              </div>
-              <ul class="compare-list">
-                <li>전시 종료 후 <b>폐기물</b> 다량 발생</li>
-                <li>PVC/복합 소재 등 <b>재활용 어려움</b></li>
-                <li>행사마다 <b>재출력·재제작</b> 반복</li>
-              </ul>
-              <div class="compare-footer">
-                <span class="tag tag--bad">폐기물 ↑</span>
-                <span class="tag tag--bad">자원낭비 ↑</span>
-              </div>
-            </div>
-
-            <div class="compare-vs" aria-hidden="true">
-              <span>VS</span>
-            </div>
-
-            <div class="compare-card compare-card--led">
-              <div class="compare-head">
-                <div class="compare-icon" aria-hidden="true">
-                  <!-- screen icon -->
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 6h16v10H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                    <path d="M8 20h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    <path d="M12 16v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="compare-k">LED 전환 전시</p>
-                  <p class="compare-t">스크린 기반 · 콘텐츠 디지털 교체</p>
-                </div>
-              </div>
-              <ul class="compare-list">
-                <li>출력물 사용 최소화로 <b>폐기물 감소</b></li>
-                <li>콘텐츠만 교체 → <b>재제작 감소</b></li>
-                <li>렌탈/모듈 재사용 → <b>지속가능 운영</b></li>
-              </ul>
-              <div class="compare-footer">
-                <span class="tag tag--good">폐기물 ↓</span>
-                <span class="tag tag--good">지속가능 ↑</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- 3 카드 요약 -->
+          <!-- 2 카드 요약 -->
           <section class="esg-cards" aria-label="ESG 요약 카드">
             <article class="esg-card esg-card--waste">
               <header class="esg-card__head">
-                <span class="chip chip--purple">폐기물 감소</span>
-                <h3>전시 폐기물 발생 자체를 줄입니다</h3>
+                <span class="chip chip--purple">폐기물·자원 감소</span>
+                <h3>출력물 사용을 줄입니다</h3>
               </header>
               <ul class="esg-card__list">
-                <li>현수막·시트지·출력 패널 등 <b>일회성 자재</b> 사용 최소화</li>
-                <li>전시 종료 후 발생하는 <b>대량 폐기물</b> 저감</li>
-                <li>PVC 배너 사용량 감소로 <b>폐기물 이슈</b> 완화</li>
-              </ul>
-            </article>
-
-            <article class="esg-card esg-card--resource">
-              <header class="esg-card__head">
-                <span class="chip chip--yellow">자원 낭비 감소</span>
-                <h3>재출력·재제작을 줄여 자원을 절감합니다</h3>
-              </header>
-              <ul class="esg-card__list">
-                <li>행사마다 반복되는 <b>출력 제작</b> 감소</li>
-                <li>종이·잉크·코팅·접착 등 <b>소모성 자재</b> 사용 절감</li>
-                <li>콘텐츠는 디지털로 업데이트(교체 비용↓)</li>
+                <li>현수막·시트지·출력물 사용 최소화</li>
+                <li>전시 종료 후 폐기물 감소</li>
               </ul>
             </article>
 
             <article class="esg-card esg-card--sustain">
               <header class="esg-card__head">
-                <span class="chip chip--purple">지속가능성 향상</span>
-                <h3>반복 사용 가능한 전시 구조를 만듭니다</h3>
+                <span class="chip chip--yellow">재사용 구조</span>
+                <h3>렌탈 기반으로 반복 사용</h3>
               </header>
               <ul class="esg-card__list">
-                <li>렌탈 기반 장비 재사용 → <b>순환형 운영</b></li>
-                <li>환경영향 관리 포인트(밝기·가동시간) <b>명확</b></li>
-                <li>운영 전력 최적화로 <b>친환경 효과 극대화</b></li>
+                <li>모듈 재사용으로 제작/폐기 감소</li>
+                <li>콘텐츠만 교체해 운영 효율 향상</li>
               </ul>
             </article>
           </section>
@@ -1410,11 +1326,8 @@
           <!-- 근거 기반 표 -->
           <section class="esg-table" id="esg-table" aria-label="근거 기반 정리표">
             <div class="table-head">
-              <h3>LED 전시 전환 시 환경적 플러스 효과 (근거 기반 정리표)</h3>
-              <p>
-                전시 부스에서 목공·현수막·출력물을 LED 스크린으로 대체할 때 기대되는 환경적 이점과
-                전시 운영 시 의미를 한 번에 정리했습니다.
-              </p>
+              <h3>LED 전시 전환 핵심 효과</h3>
+              <p>출력물 대체로 기대되는 환경 효과를 간단히 정리했습니다.</p>
             </div>
 
             <div class="table-scroll" role="region" aria-label="표 스크롤 영역" tabindex="0">
@@ -1422,60 +1335,36 @@
                 <thead>
                   <tr>
                     <th style="width: 72px;">구분</th>
-                    <th>환경적으로 플러스 되는 부분</th>
-                    <th>확인된 근거(논문·기사 요지)</th>
-                    <th>전시 부스 적용 시 의미</th>
+                    <th>효과</th>
+                    <th>근거 요약</th>
+                    <th>전시 적용</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td class="idx">①</td>
-                    <td><b>전시 폐기물 발생 감소</b><br /><span class="muted">(특히 PVC 현수막·배너)</span></td>
-                    <td>단기 사용 후 폐기되는 배너·출력물 비중이 크며, 재사용이 어려운 자재가 폐기물 문제로 이어질 수 있다는 논의가 존재</td>
-                    <td>현수막·시트지·출력 패널을 LED로 대체하면 전시 종료 후 대량 폐기물 발생을 구조적으로 줄일 수 있음</td>
+                    <td><b>폐기물 감소</b><br /><span class="muted">출력물·현수막 대체</span></td>
+                    <td>단기 사용 출력물은 폐기물로 이어질 수 있음</td>
+                    <td>LED로 대체해 폐기물 발생을 줄임</td>
                   </tr>
                   <tr>
                     <td class="idx">②</td>
-                    <td><b>재활용이 어려운 소재 사용 억제</b><br /><span class="muted">(PVC·복합 소재)</span></td>
-                    <td>PVC+복합 소재는 구조상 재활용이 제한되는 경우가 있어, 순환경제 관점에서 “사용 자체를 줄이는 감량”이 효과적이라는 접근이 활용됨</td>
-                    <td>“재활용”보다 “미사용(감량)” 중심으로 ESG 메시지를 구성하면 더 안전하고 설득력 있음</td>
+                    <td><b>재제작 감소</b><br /><span class="muted">콘텐츠 디지털 교체</span></td>
+                    <td>디지털 전환은 반복 제작을 줄임</td>
+                    <td>행사마다 출력 없이 콘텐츠만 교체</td>
                   </tr>
                   <tr>
                     <td class="idx">③</td>
-                    <td><b>반복 제작(재출력) 감소</b><br /><span class="muted">종이·잉크·코팅 절감</span></td>
-                    <td>전통 인쇄 사인은 단발성 소모재 성격이 강하고, 디지털 전환은 재제작을 줄여 자원 사용과 폐기물 발생을 낮출 수 있음</td>
-                    <td>행사마다 재출력 없이 콘텐츠만 교체 가능 → 지속가능한 운영 방식으로 설명 가능</td>
-                  </tr>
-                  <tr>
-                    <td class="idx">④</td>
-                    <td><b>운송·설치·철거·폐기 처리 부담 감소</b><br /><span class="muted">(조건부)</span></td>
-                    <td>일회성 제작물 감소는 제작·폐기 단계의 부담을 낮추는 방향으로 제로 웨이스트 전시 논의에서 다뤄짐</td>
-                    <td>목공·출력물 제작/폐기 과정이 줄어 전시 운영 프로세스가 단순해지고 폐기물 처리 부담이 완화</td>
-                  </tr>
-                  <tr>
-                    <td class="idx">⑤</td>
-                    <td><b>자원 사용 구조의 디지털 전환 효과</b></td>
-                    <td>물리 제작 중심에서 디지털 콘텐츠 중심으로 전환하면, 장기적으로 자원 효율성을 높이는 운영 구조로 설계 가능</td>
-                    <td>전시 구조가 “물리 제작”에서 “디지털 콘텐츠”로 이동 → 반복 사용·업데이트 중심 운영</td>
-                  </tr>
-                  <tr>
-                    <td class="idx">⑥</td>
-                    <td><b>환경영향 관리 포인트의 명확화</b><br /><span class="muted">(운영단계 전력관리)</span></td>
-                    <td>디스플레이/LED의 환경영향은 사용(운영) 단계 전력에 의해 좌우되는 비중이 크다는 LCA 관점의 접근이 활용됨</td>
-                    <td>밝기·가동시간·전력관리 기준을 적용할수록 친환경 효과가 명확해짐(자동밝기/스케줄 소등 등)</td>
-                  </tr>
-                  <tr>
-                    <td class="idx">⑦</td>
-                    <td><b>반복 사용 가능한 전시 구조 구축</b><br /><span class="muted">(렌탈·모듈 재사용)</span></td>
-                    <td>반복 사용 가능한 설비/모듈화는 폐기물 감축에 효과적인 접근으로 널리 사용됨</td>
-                    <td>렌탈 기반 LED 시스템은 동일 장비를 다회 사용 → ESG 실천 구조로 정리 가능</td>
+                    <td><b>반복 사용 구조</b><br /><span class="muted">렌탈·모듈 재사용</span></td>
+                    <td>모듈 재사용은 폐기물 감축에 효과적</td>
+                    <td>동일 장비를 여러 행사에 활용</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             <div class="esg-note">
-              <p>출력물을 줄이면 폐기물이 줄어듭니다. LED 전환은 <b>전시 구조의 친환경 전환</b>입니다.</p>
+              <p>출력물을 줄이면 폐기물이 줄어듭니다. LED 전환은 전시 구조를 가볍게 만듭니다.</p>
             </div>
           </section>
         </div>
