@@ -1072,6 +1072,436 @@
       }
     }
 
+    .oneoff-esg {
+      --esg-navy: #0b1f4b;
+      --esg-navy-2: #102a63;
+      --esg-blue: #2f6bff;
+      --esg-text: #0f172a;
+      --esg-muted: #5b677a;
+      --esg-bg: #f6f8fc;
+      --esg-card: #ffffff;
+      --esg-line: rgba(15, 23, 42, 0.10);
+      --esg-shadow: 0 18px 60px rgba(10, 20, 40, 0.08);
+      --esg-shadow-2: 0 10px 30px rgba(10, 20, 40, 0.06);
+      --esg-radius: 18px;
+      background: linear-gradient(180deg, #eef3ff 0%, #f6f8fc 35%, #ffffff 100%);
+      color: var(--esg-text);
+      padding: 40px 0 70px;
+      text-align: left;
+    }
+
+    .oneoff-esg .esg-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    .oneoff-esg .esgx-hero {
+      padding: 58px 0 26px;
+    }
+
+    .oneoff-esg .esgx-hero-shell {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.85) 100%);
+      border: 1px solid rgba(10, 20, 40, 0.06);
+      border-radius: calc(var(--esg-radius) + 8px);
+      box-shadow: var(--esg-shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .oneoff-esg .esgx-hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: -120px -120px auto auto;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle at 30% 30%, rgba(47, 107, 255, 0.28), rgba(78, 224, 197, 0.18) 45%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .oneoff-esg .esgx-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      padding: 44px 44px 34px;
+      align-items: center;
+    }
+
+    .oneoff-esg .esgx-pill-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .oneoff-esg .esgx-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      color: rgba(15, 23, 42, 0.8);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .oneoff-esg .esgx-title {
+      margin: 0;
+      font-size: clamp(36px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -1.2px;
+    }
+
+    .oneoff-esg .esgx-lead {
+      margin: 16px 0 22px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--esg-muted);
+      max-width: 520px;
+    }
+
+    .oneoff-esg .esgx-btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .oneoff-esg .esgx-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      background: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: var(--esg-shadow-2);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .oneoff-esg .esgx-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 44px rgba(10, 20, 40, 0.10);
+    }
+
+    .oneoff-esg .esgx-btn--primary {
+      background: linear-gradient(180deg, rgba(47, 107, 255, 1) 0%, rgba(35, 90, 240, 1) 100%);
+      color: #fff;
+      border-color: rgba(47, 107, 255, 0.45);
+      box-shadow: 0 18px 45px rgba(47, 107, 255, 0.22);
+    }
+
+    .oneoff-esg .esgx-arrow {
+      font-weight: 900;
+      opacity: 0.85;
+    }
+
+    .oneoff-esg .esgx-mock {
+      height: 260px;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0)),
+        radial-gradient(circle at 20% 20%, rgba(47, 107, 255, 0.35), rgba(255, 255, 255, 0) 55%),
+        radial-gradient(circle at 70% 70%, rgba(78, 224, 197, 0.30), rgba(255, 255, 255, 0) 55%),
+        linear-gradient(135deg, rgba(11, 31, 75, 0.20), rgba(11, 31, 75, 0.04));
+      border: 1px solid rgba(10, 20, 40, 0.08);
+      box-shadow: var(--esg-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .oneoff-esg .esgx-mock::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px 28px -40px;
+      height: 70px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+      transform: rotate(-8deg);
+      opacity: 0.65;
+    }
+
+    .oneoff-esg .esgx-mock__screen {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      width: 86%;
+      height: 64%;
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.45)),
+        linear-gradient(135deg, rgba(47, 107, 255, 0.22), rgba(78, 224, 197, 0.18));
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 20px 60px rgba(10, 20, 40, 0.12);
+    }
+
+    .oneoff-esg .esgx-mock__base {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 18px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.18);
+      filter: blur(0.2px);
+      opacity: 0.35;
+    }
+
+    .oneoff-esg .esgx-statement {
+      padding: 22px 0 6px;
+    }
+
+    .oneoff-esg .esgx-statement-card {
+      text-align: center;
+      padding: 22px 18px;
+      border-radius: var(--esg-radius);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(10, 20, 40, 0.06);
+      box-shadow: var(--esg-shadow-2);
+    }
+
+    .oneoff-esg .esgx-statement-card h3 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.6px;
+      line-height: 1.35;
+    }
+
+    .oneoff-esg .esgx-statement-card p {
+      margin: 8px 0 0;
+      color: var(--esg-muted);
+      font-weight: 600;
+    }
+
+    .oneoff-esg .esgx-section {
+      padding: 38px 0;
+    }
+
+    .oneoff-esg .esgx-section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .oneoff-esg .esgx-section-title h3 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.4px;
+    }
+
+    .oneoff-esg .esgx-sub {
+      color: var(--esg-muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .oneoff-esg .esgx-compare {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .oneoff-esg .esgx-box {
+      background: var(--esg-card);
+      border: 1px solid rgba(10, 20, 40, 0.06);
+      border-radius: var(--esg-radius);
+      box-shadow: var(--esg-shadow-2);
+      padding: 18px 18px 16px;
+    }
+
+    .oneoff-esg .esgx-box-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    .oneoff-esg .esgx-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.30);
+    }
+
+    .oneoff-esg .esgx-dot--red {
+      background: #ff5b6a;
+    }
+
+    .oneoff-esg .esgx-dot--green {
+      background: #22c55e;
+    }
+
+    .oneoff-esg .esgx-box-title {
+      font-size: 18px;
+      margin: 0 0 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .oneoff-esg .esgx-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--esg-muted);
+      font-weight: 600;
+      line-height: 1.8;
+    }
+
+    .oneoff-esg .esgx-compare-swap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 6px;
+      color: rgba(15, 23, 42, 0.55);
+      font-weight: 900;
+    }
+
+    .oneoff-esg .esgx-swap-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: rgba(47, 107, 255, 0.10);
+      border: 1px solid rgba(47, 107, 255, 0.18);
+      display: grid;
+      place-items: center;
+    }
+
+    .oneoff-esg .esgx-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .oneoff-esg .esgx-card {
+      background: var(--esg-card);
+      border: 1px solid rgba(10, 20, 40, 0.06);
+      border-radius: var(--esg-radius);
+      box-shadow: var(--esg-shadow-2);
+      padding: 18px 18px 16px;
+      min-height: 140px;
+    }
+
+    .oneoff-esg .esgx-card-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .oneoff-esg .esgx-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: rgba(47, 107, 255, 0.10);
+      border: 1px solid rgba(47, 107, 255, 0.18);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: rgba(47, 107, 255, 0.95);
+    }
+
+    .oneoff-esg .esgx-card h4 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .oneoff-esg .esgx-card p {
+      margin: 0;
+      color: var(--esg-muted);
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .oneoff-esg .esgx-fit {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(11, 31, 75, 0.04), rgba(255, 255, 255, 0.92));
+      border: 1px solid rgba(10, 20, 40, 0.06);
+      border-radius: calc(var(--esg-radius) + 6px);
+      box-shadow: var(--esg-shadow-2);
+    }
+
+    .oneoff-esg .esgx-fit h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .oneoff-esg .esgx-fit p {
+      margin: 0;
+      color: var(--esg-muted);
+      font-weight: 600;
+    }
+
+    .oneoff-esg .esgx-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .oneoff-esg .esgx-chip {
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 999px;
+      font-weight: 800;
+      color: rgba(15, 23, 42, 0.80);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .oneoff-esg .esgx-hero-grid {
+        grid-template-columns: 1fr;
+        padding: 34px 22px 26px;
+      }
+
+      .oneoff-esg .esgx-compare {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .oneoff-esg .esgx-compare-swap {
+        flex-direction: row;
+      }
+
+      .oneoff-esg .esgx-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .oneoff-esg .esgx-fit {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .oneoff-esg .esgx-title {
+        font-size: 36px;
+      }
+
+      .oneoff-esg .esgx-btn {
+        width: 100%;
+      }
+
+      .oneoff-esg .esgx-btn-row {
+        gap: 10px;
+      }
+    }
+
     .footer {
       background: var(--deep-blue);
       padding: 40px 0 60px;
@@ -1307,79 +1737,127 @@
 
       <section class="oneoff-esg" id="esg">
         <div class="esg-wrap">
-          <!-- 헤더 -->
-          <header class="esg-hero">
-            <div class="esg-hero__text">
-              <p class="esg-kicker">
-                <span class="pill pill--yellow">ESG · Environment</span>
-                <span class="pill pill--purple">ONEOFF LED RENTAL</span>
-              </p>
-              <h2 class="esg-title">
-                출력물 없이, <span class="hl hl--yellow">폐기물도 줄입니다.</span>
-              </h2>
-              <p class="esg-subtitle">
-                LED 전환으로 전시 구조는 가볍게, 운영은 더 효율적으로.
-              </p>
-
-              <div class="esg-cta">
-                <a class="btn btn--primary" href="#contact">상담 요청</a>
-                <a class="btn btn--ghost" href="#work">적용사례 보기</a>
-              </div>
-            </div>
-
-            <div class="esg-hero__stat">
-              <div class="stat-card">
-                <div class="stat-top">
-                  <span class="badge badge--purple">핵심 메시지</span>
-                  <span class="badge badge--yellow">전시 폐기물 ↓</span>
-                </div>
-                <p class="stat-quote">“콘텐츠는 바꾸고, 폐기물은 줄입니다.”</p>
-                <div class="stat-grid">
-                  <div class="stat-item">
-                    <p class="stat-label">대체 대상</p>
-                    <p class="stat-value">목공 · 현수막 · 출력물</p>
+          <section class="esgx-hero">
+            <div class="esgx-hero-shell" id="esg-top">
+              <div class="esgx-hero-grid">
+                <div class="esgx-hero-copy">
+                  <div class="esgx-pill-row">
+                    <span class="esgx-pill">ESG · Environment</span>
+                    <span class="esgx-pill">ONEOFF LED RENTAL</span>
                   </div>
-                  <div class="stat-item">
-                    <p class="stat-label">전환 방식</p>
-                    <p class="stat-value">LED 스크린 · 디지털 콘텐츠</p>
+                  <h2 class="esgx-title">출력물 없이, 폐기물도 줄입니다.</h2>
+                  <p class="esgx-lead">
+                    전시·행사용 출력물을 LED로 대체해<br />
+                    폐기물은 줄이고, 운영 효율은 높입니다.
+                  </p>
+                  <div class="esgx-btn-row">
+                    <a class="esgx-btn esgx-btn--primary" href="#contact">상담 요청하기</a>
+                    <a class="esgx-btn" href="#work">적용 사례 보기 <span class="esgx-arrow">›</span></a>
+                  </div>
+                </div>
+
+                <div class="esgx-hero-visual">
+                  <div class="esgx-mock" aria-label="LED wall visual mock">
+                    <div class="esgx-mock__screen"></div>
+                    <div class="esgx-mock__base"></div>
                   </div>
                 </div>
               </div>
             </div>
-          </header>
-
-          <div class="esg-quick" aria-label="ESG 핵심 요약">
-            <div class="esg-quick__item">폐기물 감소</div>
-            <div class="esg-quick__item">재제작 감소</div>
-            <div class="esg-quick__item">재사용 증가</div>
-          </div>
-
-          <!-- 2 카드 요약 -->
-          <section class="esg-cards" aria-label="ESG 요약 카드">
-            <article class="esg-card esg-card--waste">
-              <header class="esg-card__head">
-                <span class="chip chip--purple">폐기물·자원 감소</span>
-                <h3>출력물 사용을 줄입니다</h3>
-              </header>
-              <ul class="esg-card__list">
-                <li>현수막·시트지·출력물 사용 최소화</li>
-                <li>전시 종료 후 폐기물 감소</li>
-              </ul>
-            </article>
-
-            <article class="esg-card esg-card--sustain">
-              <header class="esg-card__head">
-                <span class="chip chip--yellow">재사용 구조</span>
-                <h3>렌탈 기반으로 반복 사용</h3>
-              </header>
-              <ul class="esg-card__list">
-                <li>모듈 재사용으로 제작/폐기 감소</li>
-                <li>콘텐츠만 교체해 운영 효율 향상</li>
-              </ul>
-            </article>
           </section>
 
-          <!-- (표 섹션 제거: 간결하게 구성) -->
+          <section class="esgx-statement">
+            <div class="esgx-statement-card">
+              <h3>콘텐츠는 바꾸고, 구조물과 출력물은 반복 사용합니다.</h3>
+              <p>ONEOFF는 '제작'이 아닌 '운영'을 설계합니다.</p>
+            </div>
+          </section>
+
+          <section class="esgx-section esgx-compare-section">
+            <div class="esgx-section-title">
+              <h3>왜 ESG에 해당하나요?</h3>
+              <div class="esgx-sub">기존 전시 방식 → LED 기반 전시 구조로 전환</div>
+            </div>
+
+            <div class="esgx-compare">
+              <div class="esgx-box">
+                <div class="esgx-box-head"><span class="esgx-dot esgx-dot--red"></span><span>기존 전시 방식</span></div>
+                <div class="esgx-box-title">출력물 중심 구조</div>
+                <ul class="esgx-list">
+                  <li>행사마다 세트 제작</li>
+                  <li>전시 종료 후 폐기</li>
+                  <li>보관 · 운송 · 재제작 반복</li>
+                </ul>
+              </div>
+
+              <div class="esgx-compare-swap" aria-hidden="true">
+                <div class="esgx-swap-arrow">⇄</div>
+                <div>전환</div>
+              </div>
+
+              <div class="esgx-box">
+                <div class="esgx-box-head"><span class="esgx-dot esgx-dot--green"></span><span>ONEOFF 방식</span></div>
+                <div class="esgx-box-title">LED 기반 전시 구조</div>
+                <ul class="esgx-list">
+                  <li>구조물 · LED 반복 사용</li>
+                  <li>콘텐츠만 교체</li>
+                  <li>제작 · 폐기 최소화</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="esgx-section esgx-cards-section">
+            <div class="esgx-section-title">
+              <h3>ONEOFF의 ESG 구조</h3>
+              <div class="esgx-sub">줄이는 것(폐기) + 바꾸는 것(운영)</div>
+            </div>
+
+            <div class="esgx-cards">
+              <article class="esgx-card">
+                <div class="esgx-card-kicker">
+                  <span class="esgx-icon">↓</span><span>Environment</span>
+                </div>
+                <h4>폐기물 감소</h4>
+                <p>현수막·시트지·패널 등 출력물 제작을 최소화해 전시 종료 후 폐기물을 줄입니다.</p>
+              </article>
+
+              <article class="esgx-card">
+                <div class="esgx-card-kicker">
+                  <span class="esgx-icon">⟲</span><span>Resource</span>
+                </div>
+                <h4>제작 감소</h4>
+                <p>모듈형 LED 구조를 반복 사용해 자원 투입과 제작 공정을 줄입니다.</p>
+              </article>
+
+              <article class="esgx-card">
+                <div class="esgx-card-kicker">
+                  <span class="esgx-icon">∞</span><span>Reuse</span>
+                </div>
+                <h4>재사용 증가</h4>
+                <p>렌탈 기반 운영으로 구조물·LED를 순환시키고, 콘텐츠 교체로 다양한 행사에 대응합니다.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="esgx-section esgx-fit-section">
+            <div class="esgx-fit">
+              <div>
+                <h3>이런 전시에 적합합니다</h3>
+                <p>일회성 출력물이 반복되는 행사일수록 LED 전환 효과는 더 커집니다.</p>
+                <div class="esgx-chips" aria-label="Use cases">
+                  <span class="esgx-chip">전시회 · 박람회</span>
+                  <span class="esgx-chip">기업 행사 · 쇼케이스</span>
+                  <span class="esgx-chip">관공서 · 공공 홍보</span>
+                  <span class="esgx-chip">브랜드 팝업 · 로드쇼</span>
+                </div>
+              </div>
+
+              <div>
+                <a class="esgx-btn esgx-btn--primary" href="#contact">상담 요청하기</a>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
 
