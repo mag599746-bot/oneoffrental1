@@ -22,6 +22,7 @@
       --ink: #0f172a;
       --ink-dark: #ffffff;
       --shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+      --shadow-soft: 0 16px 34px rgba(15, 23, 42, 0.14);
       --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
       --font-body: "Space Grotesk", "Noto Sans KR", sans-serif;
     }
@@ -216,6 +217,7 @@
       border-radius: 20px;
       border: 1px solid rgba(29, 78, 216, 0.2);
       background: #ffffff;
+      box-shadow: var(--shadow-soft);
     }
 
     .filter-input,
@@ -262,6 +264,7 @@
       color: rgba(15, 23, 42, 0.65);
       background: #ffffff;
       text-align: center;
+      box-shadow: var(--shadow-soft);
     }
 
     .section {
@@ -343,6 +346,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       font: inherit;
       color: inherit;
+      box-shadow: var(--shadow-soft);
     }
 
     .gallery-item.is-hidden {
