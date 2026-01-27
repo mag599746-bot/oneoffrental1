@@ -10,15 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f7f9ff;
+      --bg: #f2f6ff;
       --panel: #ffffff;
-      --panel-strong: #eef3ff;
-      --border: #d6e4ff;
+      --panel-strong: #e8f0ff;
+      --border: #cfe0ff;
       --accent: #1d4ed8;
       --deep-blue: #0b1e5b;
       --deep-blue-2: #14318a;
       --text: rgba(15, 23, 42, 0.96);
-      --muted: rgba(15, 23, 42, 0.65);
+      --muted: rgba(15, 23, 42, 0.7);
       --shadow-soft: 0 18px 36px rgba(15, 23, 42, 0.14);
     }
 
@@ -31,9 +31,9 @@
       font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(900px 420px at 20% -10%, rgba(29, 78, 216, 0.12), transparent 60%),
-        radial-gradient(700px 360px at 90% 10%, rgba(29, 78, 216, 0.08), transparent 60%),
-        var(--bg);
+        radial-gradient(900px 420px at 20% -10%, rgba(29, 78, 216, 0.14), transparent 60%),
+        radial-gradient(700px 360px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%),
+        linear-gradient(180deg, #eef4ff 0%, #ffffff 100%);
     }
 
     a {
@@ -1103,7 +1103,7 @@
 
     .oneoff-esg .esgx-hero {
       padding: 0;
-      min-height: 100vh;
+      min-height: 72vh;
       display: flex;
       align-items: center;
     }
@@ -1116,7 +1116,7 @@
       overflow: hidden;
       position: relative;
       width: 100%;
-      min-height: 100vh;
+      min-height: 72vh;
     }
 
     .oneoff-esg .esgx-hero-shell::before {
@@ -1348,11 +1348,11 @@
     }
 
     .oneoff-esg .esgx-dot--red {
-      background: #ff5b6a;
+      background: #3b82f6;
     }
 
     .oneoff-esg .esgx-dot--green {
-      background: #22c55e;
+      background: #60a5fa;
     }
 
     .oneoff-esg .esgx-box-title {
@@ -1484,6 +1484,11 @@
         width: calc(100% - 64px);
       }
 
+      .oneoff-esg .esgx-hero,
+      .oneoff-esg .esgx-hero-shell {
+        min-height: 60vh;
+      }
+
       .oneoff-esg .esgx-hero-grid {
         grid-template-columns: 1fr;
         padding: 36px 24px 30px;
@@ -1510,6 +1515,11 @@
     @media (max-width: 520px) {
       .oneoff-esg .esg-wrap {
         width: calc(100% - 48px);
+      }
+
+      .oneoff-esg .esgx-hero,
+      .oneoff-esg .esgx-hero-shell {
+        min-height: auto;
       }
 
       .oneoff-esg .esgx-title {
