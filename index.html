@@ -293,20 +293,27 @@
     }
 
     .ticker {
+      overflow: hidden;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      background: rgba(29, 78, 216, 0.06);
+      background: var(--panel);
       padding: 12px 0;
     }
 
     .ticker__track {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 48px;
+      white-space: nowrap;
       font-weight: 600;
-      letter-spacing: 0.18em;
-      color: var(--muted);
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      animation: ticker-scroll 22s linear infinite;
+      padding-left: 100%;
+    }
+
+    .ticker__track span {
+      flex: 0 0 auto;
     }
 
     .section {
@@ -1177,17 +1184,21 @@
 
     .oneoff-esg .esgx-title {
       margin: 0;
-      font-size: clamp(40px, 4.5vw, 60px);
+      font-size: clamp(45px, 4.9vw, 65px);
       line-height: 1.08;
       letter-spacing: -1.2px;
+      max-width: 560px;
+      text-wrap: balance;
     }
 
     .oneoff-esg .esgx-lead {
-      margin: 16px 0 22px;
-      font-size: 16px;
-      line-height: 1.7;
+      margin: 18px 0 26px;
+      font-size: 21px;
+      line-height: 1.65;
       color: var(--esg-muted);
-      max-width: 520px;
+      max-width: 580px;
+      font-weight: 500;
+      text-wrap: balance;
     }
 
     .oneoff-esg .esgx-btn-row {
@@ -1547,11 +1558,16 @@
       }
 
       .oneoff-esg .esgx-title {
-        font-size: 36px;
+        font-size: 41px;
       }
 
       .oneoff-esg .esgx-btn {
         width: 100%;
+      }
+
+      .ticker__track {
+        font-size: 14px;
+        letter-spacing: 0.08em;
       }
 
       .oneoff-esg .esgx-btn-row {
@@ -1613,6 +1629,15 @@
       }
       95%, 100% {
         opacity: 0;
+      }
+    }
+
+    @keyframes ticker-scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
       }
     }
 
@@ -1711,6 +1736,17 @@
             </div>
           </div>
           <p class="hero__note hero__note--wide">ONEOFF는 LED 인포데스크, LED 배너, Custom LED를 합리적으로 렌탈하고 배송/설치/회수까지 원스톱 제공하는 렌탈 전문 업체입니다.</p>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="메인 롤링 문구">
+        <div class="ticker__track">
+          <span>출력물 대신 LED, 운영은 더 스마트하게</span>
+          <span>출력물 대신 LED, 운영은 더 스마트하게</span>
+          <span>출력물 대신 LED, 운영은 더 스마트하게</span>
+          <span>출력물 대신 LED, 운영은 더 스마트하게</span>
+          <span>출력물 대신 LED, 운영은 더 스마트하게</span>
+          <span>출력물 대신 LED, 운영은 더 스마트하게</span>
         </div>
       </section>
 
