@@ -8,10 +8,15 @@
 5. Start Command: `npm start`
 6. Environment Variables: `.env.example` 참고하여 설정
 
+## 무료 플랜 권장 방식
+- Render 무료 플랜은 디스크가 없어 SQLite 데이터가 유지되지 않습니다.
+- `DATABASE_URL`을 설정해 **Supabase/Neon Postgres**를 사용하세요.
+
 ## 필수 환경변수
 - ADMIN_PASSWORD
 - ADMIN_TOKEN_SECRET
 - ALLOWED_ORIGINS
+- DATABASE_URL
 - SMTP_HOST
 - SMTP_PORT
 - SMTP_USER

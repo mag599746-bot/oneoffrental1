@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import sqlite3 from "sqlite3";
 import { createHmac } from "crypto";
+import { Pool } from "pg";
 
 dotenv.config();
 
@@ -24,6 +25,8 @@ const {
   SENS_SECRET_KEY,
   SENS_FROM_NUMBER,
   ADMIN_PHONE,
+  DATABASE_URL,
+  PG_SSL = "true",
 } = process.env;
 
 if (!ADMIN_PASSWORD || !ADMIN_TOKEN_SECRET) {
@@ -50,12 +53,44 @@ app.use(
   })
 );
 
-const db = new sqlite3.Database("./data.sqlite");
+const dbType = DATABASE_URL ? "postgres" : "sqlite";
+let sqliteDb = null;
+let pgPool = null;
 
-db.serialize(() => {
-  db.run(
+function initSqlite() {
+  sqliteDb = new sqlite3.Database("./data.sqlite");
+  sqliteDb.serialize(() => {
+    sqliteDb.run(
+      `CREATE TABLE IF NOT EXISTS quotes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        eventName TEXT NOT NULL,
+        eventDate TEXT NOT NULL,
+        eventPlace TEXT NOT NULL,
+        eventDuration TEXT,
+        ledType TEXT,
+        ledSize TEXT,
+        ledContent TEXT,
+        power TEXT,
+        extra TEXT,
+        contactName TEXT NOT NULL,
+        contactCompany TEXT,
+        contactPhone TEXT NOT NULL,
+        contactEmail TEXT NOT NULL,
+        createdAt TEXT NOT NULL
+      )`
+    );
+  });
+}
+
+async function initPostgres() {
+  pgPool = new Pool({
+    connectionString: DATABASE_URL,
+    ssl: PG_SSL === "true" ? { rejectUnauthorized: false } : undefined,
+  });
+
+  await pgPool.query(
     `CREATE TABLE IF NOT EXISTS quotes (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       eventName TEXT NOT NULL,
       eventDate TEXT NOT NULL,
       eventPlace TEXT NOT NULL,
@@ -72,11 +107,11 @@ db.serialize(() => {
       createdAt TEXT NOT NULL
     )`
   );
-});
+}
 
-function runQuery(sql, params = []) {
+function runSqlite(sql, params = []) {
   return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
+    sqliteDb.run(sql, params, function (err) {
       if (err) {
         reject(err);
         return;
@@ -86,9 +121,9 @@ function runQuery(sql, params = []) {
   });
 }
 
-function allQuery(sql, params = []) {
+function allSqlite(sql, params = []) {
   return new Promise((resolve, reject) => {
-    db.all(sql, params, (err, rows) => {
+    sqliteDb.all(sql, params, (err, rows) => {
       if (err) {
         reject(err);
         return;
@@ -96,6 +131,41 @@ function allQuery(sql, params = []) {
       resolve(rows);
     });
   });
+}
+
+async function insertQuote(values) {
+  if (dbType === "postgres") {
+    await pgPool.query(
+      `INSERT INTO quotes (eventName, eventDate, eventPlace, eventDuration, ledType, ledSize, ledContent, power, extra, contactName, contactCompany, contactPhone, contactEmail, createdAt)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`
+      ,
+      values
+    );
+    return;
+  }
+
+  await runSqlite(
+    `INSERT INTO quotes (eventName, eventDate, eventPlace, eventDuration, ledType, ledSize, ledContent, power, extra, contactName, contactCompany, contactPhone, contactEmail, createdAt)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ,
+    values
+  );
+}
+
+async function getQuotes() {
+  if (dbType === "postgres") {
+    const result = await pgPool.query("SELECT * FROM quotes ORDER BY id DESC");
+    return result.rows;
+  }
+  return allSqlite("SELECT * FROM quotes ORDER BY id DESC");
+}
+
+async function deleteQuote(id) {
+  if (dbType === "postgres") {
+    await pgPool.query("DELETE FROM quotes WHERE id = $1", [id]);
+    return;
+  }
+  await runSqlite("DELETE FROM quotes WHERE id = ?", [id]);
 }
 
 function authMiddleware(req, res, next) {
@@ -216,7 +286,7 @@ app.post("/api/admin/login", (req, res) => {
 
 app.get("/api/admin/quotes", authMiddleware, async (req, res) => {
   try {
-    const rows = await allQuery("SELECT * FROM quotes ORDER BY id DESC");
+    const rows = await getQuotes();
     res.json(rows);
   } catch (error) {
     res.status(500).json({ message: "Failed to load quotes" });
@@ -226,7 +296,7 @@ app.get("/api/admin/quotes", authMiddleware, async (req, res) => {
 app.delete("/api/admin/quotes/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    await runQuery("DELETE FROM quotes WHERE id = ?", [id]);
+    await deleteQuote(id);
     res.json({ ok: true });
   } catch {
     res.status(500).json({ message: "Failed to delete" });
@@ -244,29 +314,25 @@ app.post("/api/quotes", async (req, res) => {
   }
 
   const createdAt = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+  const values = [
+    payload.eventName,
+    payload.eventDate,
+    payload.eventPlace,
+    payload.eventDuration || "",
+    payload.ledType || "",
+    payload.ledSize || "",
+    payload.ledContent || "",
+    payload.power || "",
+    payload.extra || "",
+    payload.contactName,
+    payload.contactCompany || "",
+    payload.contactPhone,
+    payload.contactEmail,
+    createdAt,
+  ];
 
   try {
-    await runQuery(
-      `INSERT INTO quotes (eventName, eventDate, eventPlace, eventDuration, ledType, ledSize, ledContent, power, extra, contactName, contactCompany, contactPhone, contactEmail, createdAt)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-      ,
-      [
-        payload.eventName,
-        payload.eventDate,
-        payload.eventPlace,
-        payload.eventDuration || "",
-        payload.ledType || "",
-        payload.ledSize || "",
-        payload.ledContent || "",
-        payload.power || "",
-        payload.extra || "",
-        payload.contactName,
-        payload.contactCompany || "",
-        payload.contactPhone,
-        payload.contactEmail,
-        createdAt,
-      ]
-    );
+    await insertQuote(values);
 
     await Promise.all([
       sendEmail({ ...payload, createdAt }),
@@ -280,6 +346,21 @@ app.post("/api/quotes", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+async function start() {
+  try {
+    if (dbType === "postgres") {
+      await initPostgres();
+    } else {
+      initSqlite();
+    }
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server", error);
+    process.exit(1);
+  }
+}
+
+start();
