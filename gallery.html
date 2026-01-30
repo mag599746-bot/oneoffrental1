@@ -7,11 +7,11 @@
   <meta name="description" content="ONEOFF LED 렌탈 갤러리. 행사별 렌탈 사례와 상세 정보를 확인하세요." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --purple-950: #0b1e5b;
-      --purple-900: #102a73;
+      --purple-900: #0b1e5b;
       --purple-800: #14318a;
       --purple-700: #1d4ed8;
       --purple-600: #2563eb;
@@ -23,8 +23,8 @@
       --ink-dark: #ffffff;
       --shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
       --shadow-soft: 0 16px 34px rgba(15, 23, 42, 0.14);
-      --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
-      --font-body: "Space Grotesk", "Noto Sans KR", sans-serif;
+      --font-display: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      --font-body: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
     }
 
     * {
@@ -36,9 +36,9 @@
       font-family: var(--font-body);
       color: var(--ink);
       background:
-        radial-gradient(900px 500px at 5% -10%, rgba(29, 78, 216, 0.12), transparent 60%),
-        radial-gradient(900px 600px at 95% -15%, rgba(96, 165, 250, 0.2), transparent 60%),
-        linear-gradient(180deg, #f7f9ff 0%, #eef3ff 100%);
+        radial-gradient(900px 420px at 20% -10%, rgba(29, 78, 216, 0.14), transparent 60%),
+        radial-gradient(700px 360px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%),
+        linear-gradient(180deg, #eef4ff 0%, #ffffff 100%);
     }
 
     a {
@@ -66,24 +66,26 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(11, 30, 91, 0.95);
+      background: rgba(11, 30, 91, 0.98);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
       color: #fff;
     }
 
     .header__inner {
       display: flex;
       align-items: center;
-      gap: 24px;
-      padding: 18px 0;
+      gap: 16px;
+      padding: 14px 0;
+      flex-wrap: wrap;
     }
 
     .header__actions {
       margin-left: auto;
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -102,28 +104,25 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: 22px;
-      font-weight: 500;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-left: auto;
     }
 
     .nav a {
-      position: relative;
-      padding-bottom: 4px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
     }
 
-    .nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0;
-      height: 2px;
-      background: var(--yellow-500);
-      transition: width 0.3s ease;
-    }
-
-    .nav a:hover::after {
-      width: 100%;
+    .nav a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .menu-toggle {
@@ -152,9 +151,9 @@
       cursor: pointer;
     }
 
-    .btn--solid {
-      background: linear-gradient(120deg, var(--yellow-500), var(--yellow-300));
-      color: var(--ink-dark);
+    .btn--accent {
+      background: var(--yellow-500);
+      color: #fff;
       box-shadow: 0 12px 30px rgba(29, 78, 216, 0.3);
     }
 
@@ -552,7 +551,7 @@
         display: flex;
       }
 
-      .header__actions .btn--solid {
+      .header__actions .btn--accent {
         order: 1;
       }
 
@@ -586,16 +585,15 @@
   <div class="page">
     <header class="site-header">
       <div class="container header__inner">
-        <a class="logo" href="index.html"><img src="assets/NEWLOGO3-01.png" alt="ONEOFF" /></a>
+        <a class="logo" href="index.html"><img src="assets/logo.png" alt="ONEOFF" /></a>
         <div class="header__actions">
           <nav class="nav" id="site-nav" aria-label="주요 메뉴">
-            <a href="index.html#work">친환경 렌탈 서비스</a>
-            <a href="index.html#story">전시 스토리</a>
-            <a href="gallery.html">렌탈 갤러리</a>
+            <a href="index.html#home">메인</a>
             <a href="index.html#process">렌탈 프로세스</a>
-            <a href="index.html#impact">운영 지표</a>
+            <a href="index.html#products">추천 제품</a>
+            <a href="index.html#quote">견적 문의</a>
           </nav>
-          <a class="btn btn--solid" href="index.html#contact">렌탈 문의</a>
+          <a class="btn btn--accent" href="index.html#quote">견적 문의</a>
           <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
         </div>
       </div>

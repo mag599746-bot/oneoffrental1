@@ -375,20 +375,83 @@
     }
 
     .process {
+      --process-gap: 32px;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+      gap: var(--process-gap);
     }
 
     .step {
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px;
+      border-radius: 12px;
+      padding: 16px;
       display: grid;
       gap: 8px;
       box-shadow: var(--shadow-soft);
+      position: relative;
+      z-index: 1;
     }
+
+    .step__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .step__head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step__title {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .step__title span {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+    }
+
+    .step__title strong {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .step:nth-child(1) { z-index: 4; }
+    .step:nth-child(2) { z-index: 3; }
+    .step:nth-child(3) { z-index: 2; }
+    .step:nth-child(4) { z-index: 1; }
 
     .step span {
       color: var(--accent);
@@ -421,6 +484,42 @@
       padding: 18px;
       display: grid;
       gap: 8px;
+    }
+
+    .product-card__body h3 {
+      margin: 0;
+      min-height: 48px;
+    }
+
+    .product-card__body .lead {
+      min-height: 48px;
+    }
+
+    .product-card__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .product-card__actions .btn {
+      flex: 1;
+      justify-content: center;
+      min-width: 120px;
+    }
+
+    .product-card__actions .btn--primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: rgba(29, 78, 216, 0.5);
+      box-shadow: 0 12px 24px rgba(29, 78, 216, 0.3);
+    }
+
+    .product-card__actions .btn--secondary {
+      background: #fff;
+      color: var(--accent);
+      border-color: rgba(29, 78, 216, 0.45);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
     }
 
     .product-card__meta {
@@ -629,6 +728,10 @@
       .products {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .step::after {
+        display: none;
+      }
     }
 
     @media (max-width: 720px) {
@@ -710,23 +813,43 @@
         </div>
         <div class="process">
           <div class="step">
-            <span>01 REQUEST</span>
-            <strong>렌탈 문의</strong>
+            <div class="step__head">
+              <div class="step__icon">📩</div>
+              <div class="step__title">
+                <span>01 REQUEST</span>
+                <strong>렌탈 문의</strong>
+              </div>
+            </div>
             <p class="lead">일정, 장소, 필요한 장비 구성을 전달해 주세요.</p>
           </div>
           <div class="step">
-            <span>02 CHECK</span>
-            <strong>스펙 확인</strong>
+            <div class="step__head">
+              <div class="step__icon">🔎</div>
+              <div class="step__title">
+                <span>02 CHECK</span>
+                <strong>스펙 확인</strong>
+              </div>
+            </div>
             <p class="lead">현장 규모와 전력/설치 조건을 확인합니다.</p>
           </div>
           <div class="step">
-            <span>03 DELIVER</span>
-            <strong>배송/설치</strong>
+            <div class="step__head">
+              <div class="step__icon">🛠️</div>
+              <div class="step__title">
+                <span>03 DELIVER</span>
+                <strong>배송/설치</strong>
+              </div>
+            </div>
             <p class="lead">일정에 맞춰 장비를 납품하고 설치합니다.</p>
           </div>
           <div class="step">
-            <span>04 RETURN</span>
-            <strong>운영/회수</strong>
+            <div class="step__head">
+              <div class="step__icon">✅</div>
+              <div class="step__title">
+                <span>04 RETURN</span>
+                <strong>운영/회수</strong>
+              </div>
+            </div>
             <p class="lead">행사 운영 지원 후 장비를 회수합니다.</p>
           </div>
         </div>
@@ -778,27 +901,33 @@
             <div class="product-card__media" style="background-image: url('assets/led-wall-02.jpg'); background-size: cover; background-position: center;"></div>
             <div class="product-card__body">
               <div class="product-card__meta">LED WALL</div>
-              <h3>Ruby P2.3 Pro</h3>
-              <p class="lead">메인 무대와 백월에 최적화된 대형 LED WALL 렌탈.</p>
-              <a class="btn btn--ghost" href="#quote">견적 요청</a>
+              <h3>LED WALL</h3>
+              <div class="product-card__actions">
+                <a class="btn btn--primary" href="#quote">견적 요청</a>
+                <a class="btn btn--secondary" href="gallery.html#gallery-led-wall">갤러리 보기</a>
+              </div>
             </div>
           </article>
           <article class="product-card">
             <div class="product-card__media" style="background-image: url('assets/led-info-01.png'); background-size: cover; background-position: center;"></div>
             <div class="product-card__body">
-              <div class="product-card__meta">LED INFO</div>
-              <h3>Carbon P3.9 Air</h3>
-              <p class="lead">브랜드 메시지를 가장 먼저 전달하는 프론트존 LED 인포데스크 렌탈.</p>
-              <a class="btn btn--ghost" href="#quote">견적 요청</a>
+              <div class="product-card__meta">LED 인포데스크</div>
+              <h3>LED 인포데스크</h3>
+              <div class="product-card__actions">
+                <a class="btn btn--primary" href="#quote">견적 요청</a>
+                <a class="btn btn--secondary" href="gallery.html#gallery-info-desk">갤러리 보기</a>
+              </div>
             </div>
           </article>
           <article class="product-card">
             <div class="product-card__media" style="background-image: url('assets/led-banner-01.png'); background-size: cover; background-position: center;"></div>
             <div class="product-card__body">
-              <div class="product-card__meta">LED BANNER</div>
-              <h3>Flex Curve P2.9</h3>
-              <p class="lead">동선을 따라 메시지를 이어주는 대형 LED 배너 렌탈.</p>
-              <a class="btn btn--ghost" href="#quote">견적 요청</a>
+              <div class="product-card__meta">LED 배너</div>
+              <h3>LED 배너</h3>
+              <div class="product-card__actions">
+                <a class="btn btn--primary" href="#quote">견적 요청</a>
+                <a class="btn btn--secondary" href="gallery.html#gallery-led-banner">갤러리 보기</a>
+              </div>
             </div>
           </article>
         </div>
