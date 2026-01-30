@@ -274,6 +274,10 @@ app.get("/health", (req, res) => {
   res.json({ ok: true });
 });
 
+app.get("/", (req, res) => {
+  res.redirect(302, "https://mag599746-bot.github.io/oneoffrental2/admin.html");
+});
+
 app.post("/api/admin/login", (req, res) => {
   const { password } = req.body || {};
   if (!password || password !== ADMIN_PASSWORD) {
