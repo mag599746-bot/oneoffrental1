@@ -120,13 +120,14 @@
     .btn--accent {
       background: var(--accent);
       color: #fff;
+      border-color: rgba(255, 255, 255, 0.5);
       box-shadow: 0 12px 24px rgba(29, 78, 216, 0.25);
     }
 
     .btn--ghost {
-      color: var(--accent);
-      border-color: rgba(29, 78, 216, 0.25);
-      background: rgba(29, 78, 216, 0.08);
+      color: #f8fafc;
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .btn--dark {
@@ -176,16 +177,17 @@
     }
 
     .hero h1 {
-      margin: 0;
+      margin: 10px 0 18px;
       font-size: clamp(34px, 4vw, 58px);
       line-height: 1.15;
+      text-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.35);
     }
 
     .hero .lead {
-      margin: 0;
+      margin: 0 0 20px;
       color: rgba(255, 255, 255, 0.78);
-      font-size: 17px;
-      line-height: 1.6;
+      font-size: 16px;
+      line-height: 1.75;
       max-width: 620px;
     }
 
@@ -193,6 +195,15 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+
+    .hero__actions .btn {
+      min-width: 200px;
+      padding: 12px 28px;
     }
 
     .hero__card {
@@ -209,20 +220,32 @@
       overflow: hidden;
       background: rgba(255, 255, 255, 0.12);
       border: 1px solid rgba(255, 255, 255, 0.2);
+      aspect-ratio: 16 / 9;
     }
 
     .hero__screen img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.9s ease-in-out;
+    }
+
+    .hero__screen img.is-fading {
+      opacity: 0;
     }
 
     .hero__note {
-      margin-top: 12px;
+      margin-top: 18px;
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 13px;
+      font-size: 16px;
+      line-height: 1.75;
       color: rgba(255, 255, 255, 0.7);
+    }
+
+    .admin-panel {
+      display: none;
     }
 
     .section {
@@ -243,9 +266,10 @@
     }
 
     .section__head p {
-      margin: 8px 0 0;
+      margin: 10px 0 0;
       color: var(--muted);
       max-width: 640px;
+      line-height: 1.7;
     }
 
     .trust {
@@ -256,21 +280,60 @@
       text-align: center;
     }
 
-    .trust__logos {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+    .trust-grid {
       width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 28px 32px;
+      align-items: center;
+      justify-items: center;
     }
 
-    .trust__logo {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 16px;
-      font-weight: 700;
-      color: var(--muted);
-      box-shadow: var(--shadow-soft);
+    .trust-card {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 96px;
+    }
+
+    .trust-logo {
+      width: 160px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      border: 0;
+    }
+
+    .trust-logo img {
+      width: auto;
+      height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .trust-logo span {
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+    }
+
+    .trust-logo.logo-kt img {
+      height: 48px;
+    }
+
+    .trust-logo.logo-seoulblind {
+      width: 180px;
+      height: 80px;
+    }
+
+    .trust-logo.logo-seoulblind span {
+      font-size: 18px;
     }
 
     .stats {
@@ -376,6 +439,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
       gap: 20px;
+      align-items: stretch;
     }
 
     .quote-steps {
@@ -407,6 +471,7 @@
       padding: 16px;
       display: grid;
       gap: 12px;
+      height: 100%;
     }
 
     .quote-panel h3 {
@@ -451,6 +516,14 @@
     .quote-side {
       display: grid;
       gap: 14px;
+      height: 100%;
+      grid-template-rows: 1fr 1fr;
+      align-content: stretch;
+      align-self: stretch;
+    }
+
+    .quote-side .panel {
+      height: 100%;
     }
 
     .quote-side .panel {
@@ -554,7 +627,7 @@
       .stats,
       .process,
       .products,
-      .trust__logos,
+      .trust-grid,
       .quote-grid {
         grid-template-columns: 1fr;
       }
@@ -593,71 +666,24 @@
     <section class="hero" id="home">
       <div class="container hero__inner">
         <div>
-          <span class="eyebrow">LED RENTAL SOLUTION</span>
+          <span class="eyebrow" style="display:block; margin-bottom: 6px;">LED RENTAL SOLUTION</span>
           <h1>버려지는 현수막 대신,<br />기억되는 빛의 공간으로.</h1>
           <p class="lead">출력물 대신 LED(Zero-waste) 전시, 공간의 빛나는 움직임으로 브랜드의 존재감을 높여줍니다.</p>
-          <div class="hero__actions">
-            <a class="btn btn--accent" href="#quote">맞춤형 LED 견적 요청</a>
-            <a class="btn btn--ghost" href="#products">추천 제품 보기</a>
-          </div>
           <div class="hero__note">ONEOFF는 LED 인포데스크, LED 배너, Custom LED를 렌탈하고 배송/설치/회수까지 원스톱 제공하는 전문 업체입니다.</div>
         </div>
-        <div class="hero__card">
-          <div class="hero__screen">
-            <img src="assets/hero.png" alt="LED 렌탈 쇼케이스" />
+          <div class="hero__card">
+            <div class="hero__screen">
+            <img id="heroImage" src="assets/1.jpg" alt="LED 렌탈 메인 비주얼" />
+            </div>
+          <div class="hero__actions">
+            <a class="btn btn--accent" href="#quote">맞춤형 LED 견적 요청</a>
+            <a class="btn btn--accent" href="#products">추천 제품 보기</a>
           </div>
-          <div class="hero__note">주요 행사에 바로 적용 가능한 LED 렌탈 패키지 제공</div>
-        </div>
+          </div>
       </div>
     </section>
 
-    <section class="section" id="trust">
-      <div class="container trust">
-        <div>
-          <span class="eyebrow" style="color: var(--accent);">Trusted</span>
-          <h2>브랜드 파트너와 함께합니다</h2>
-          <p>전시·박람회·행사 운영에 필요한 LED 솔루션을 빠르게 제공합니다.</p>
-        </div>
-        <div class="trust__logos">
-          <div class="trust__logo">Google</div>
-          <div class="trust__logo">Oracle</div>
-          <div class="trust__logo">Salesforce</div>
-          <div class="trust__logo">Adobe</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="stats">
-      <div class="container">
-        <div class="section__head">
-          <div>
-            <span class="eyebrow" style="color: var(--accent);">Reliability</span>
-            <h2>렌탈 운영 지표</h2>
-            <p>정시 납품, 장비 가동률, 빠른 응대로 안정적인 렌탈 운영을 제공합니다.</p>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="stat-card">
-            <span>렌탈 출고</span>
-            <strong>500+</strong>
-          </div>
-          <div class="stat-card">
-            <span>장비 가동률</span>
-            <strong>99.9%</strong>
-          </div>
-          <div class="stat-card">
-            <span>현장 설치</span>
-            <strong>15+</strong>
-          </div>
-          <div class="stat-card">
-            <span>응답 속도</span>
-            <strong>40m</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="process">
+<section class="section" id="process">
       <div class="container">
         <div class="section__head">
           <div>
@@ -691,7 +717,37 @@
       </div>
     </section>
 
-    <section class="section" id="products">
+<section class="section" id="stats">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow" style="color: var(--accent);">Reliability</span>
+            <h2>렌탈 운영 지표</h2>
+            <p>정시 납품, 장비 가동률, 빠른 응대로 안정적인 렌탈 운영을 제공합니다.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <span>렌탈 출고</span>
+            <strong>500+</strong>
+          </div>
+          <div class="stat-card">
+            <span>장비 가동률</span>
+            <strong>99.9%</strong>
+          </div>
+          <div class="stat-card">
+            <span>현장 설치</span>
+            <strong>15+</strong>
+          </div>
+          <div class="stat-card">
+            <span>응답 속도</span>
+            <strong>40m</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section" id="products">
       <div class="container">
         <div class="section__head">
           <div>
@@ -835,6 +891,8 @@
             </form>
 
             <div class="quote-side">
+
+
               <div class="panel">
                 <strong>문의 시 확인해주세요</strong>
                 <div>요청 내용을 확인 후 담당자가 빠르게 안내드립니다.</div>
@@ -849,25 +907,83 @@
                 <a class="btn btn--dark" href="tel:010-5632-5042">전화 문의하기</a>
               </div>
 
-              <div class="callout">
-                <strong>TechSummit 2024</strong>
-                <div>행사별 레퍼런스 확인 가능</div>
-              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <div class="panel">
-                <div style="display:flex; align-items:center; justify-content: space-between; gap: 8px;">
-                  <strong>관리자 전용 게시판</strong>
-                  <button id="adminToggle" class="btn btn--ghost" type="button">관리자 보기</button>
-                </div>
-                <div class="admin-only" id="adminPanel">
-                  <div style="display:flex; align-items:center; justify-content: space-between; gap: 8px;">
-                    <span>접수된 견적 요청</span>
-                    <button id="adminLogout" class="btn btn--dark" type="button">로그아웃</button>
-                  </div>
-                  <div id="boardList" class="board-list"></div>
-                </div>
-                <p class="hero__note" id="adminHint">관리자 로그인 후 요청 목록을 확인할 수 있습니다.</p>
-              </div>
+    <section class="section" id="trust">
+      <div class="container trust">
+        <div>
+          <span class="eyebrow" style="color: var(--accent);">Trusted</span>
+          <h2>파트너</h2>
+          <p>기업·기관과의 협업 경험을 바탕으로 안정적인 LED 렌탈을 제공합니다.</p>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/marie-claire.svg" alt="마리끌레르 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/moef.svg" alt="기획재정부 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/kipf.png" alt="한국조세재정연구원 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/moel.svg" alt="고용노동부 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/hansung-baekje.png" alt="한성백제박물관 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/dongduk.png" alt="동덕여자대학교 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo logo-seoulblind">
+              <span>서울맹학교</span>
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/lotte.svg" alt="롯데백화점 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo logo-kt">
+              <img src="assets/partners/kt.svg" alt="KT 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="assets/partners/coupang.svg" alt="쿠팡 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/17/JWMarriott.svg/250px-JWMarriott.svg.png" alt="JW Marriott 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="https://www.gimpo.go.kr/site/portal/images/contents/cts1232_img01.jpg" alt="김포시청 로고" />
+            </div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Ulsan_Metropolitan_Office_of_Education_Logo_%28vertical%29.svg/960px-Ulsan_Metropolitan_Office_of_Education_Logo_%28vertical%29.svg.png" alt="울산광역시교육청 로고" />
             </div>
           </div>
         </div>
@@ -902,8 +1018,27 @@
     const adminPanel = document.getElementById("adminPanel");
     const adminHint = document.getElementById("adminHint");
     const boardList = document.getElementById("boardList");
+    const heroImage = document.getElementById("heroImage");
 
     const ADMIN_TOKEN_KEY = "oneoff_admin_token";
+    const heroImages = ["assets/1.jpg", "assets/f2.png", "assets/f3.png"];
+    let heroIndex = 0;
+
+    function rotateHeroImage() {
+      if (!heroImage) return;
+      const nextIndex = (heroIndex + 1) % heroImages.length;
+      const nextSrc = heroImages[nextIndex];
+      const preloader = new Image();
+      preloader.onload = () => {
+        heroImage.classList.add("is-fading");
+        setTimeout(() => {
+          heroImage.src = nextSrc;
+          heroImage.classList.remove("is-fading");
+          heroIndex = nextIndex;
+        }, 450);
+      };
+      preloader.src = nextSrc;
+    }
 
     function getToken() {
       return localStorage.getItem(ADMIN_TOKEN_KEY);
@@ -934,6 +1069,7 @@
     }
 
     function renderBoard(items) {
+      if (!boardList) return;
       boardList.innerHTML = "";
       if (!items.length) {
         boardList.innerHTML = "<div class=\"board-item\">접수된 요청이 없습니다.</div>";
@@ -955,6 +1091,7 @@
     }
 
     function setAdminMode(enabled) {
+      if (!adminPanel || !adminHint || !adminToggle) return;
       adminPanel.classList.toggle("is-visible", enabled);
       adminHint.style.display = enabled ? "none" : "block";
       adminToggle.textContent = enabled ? "관리자 접속됨" : "관리자 보기";
@@ -1001,24 +1138,32 @@
       }
     });
 
-    adminToggle.addEventListener("click", async () => {
-      if (getToken()) {
-        return;
-      }
-      try {
-        await handleAdminLogin();
-      } catch (error) {
-        alert(error.message || "관리자 로그인 실패");
-      }
-    });
+    if (adminToggle) {
+      adminToggle.addEventListener("click", async () => {
+        if (getToken()) {
+          return;
+        }
+        try {
+          await handleAdminLogin();
+        } catch (error) {
+          alert(error.message || "관리자 로그인 실패");
+        }
+      });
+    }
 
-    adminLogout.addEventListener("click", () => {
-      setToken("");
-      setAdminMode(false);
-    });
+    if (adminLogout) {
+      adminLogout.addEventListener("click", () => {
+        setToken("");
+        setAdminMode(false);
+      });
+    }
+
+    if (heroImage && heroImages.length > 1) {
+      setInterval(rotateHeroImage, 4500);
+    }
 
     (async () => {
-      if (getToken()) {
+      if (getToken() && adminPanel) {
         try {
           setAdminMode(true);
           const items = await fetchQuotes();
