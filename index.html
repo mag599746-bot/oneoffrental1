@@ -1,4 +1,4 @@
-<!doctype html>
+\ufeff<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
@@ -228,89 +228,28 @@
       flex-direction: column;
     }
 
-    .slider {
-      position: relative;
+    .hero__screen {
+      border-radius: 0;
+      overflow: visible;
+      background: transparent;
+      border: 0;
       width: 100%;
-      aspect-ratio: 16 / 11;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(5, 10, 28, 0.35);
+      height: 100%;
+      min-height: clamp(260px, 42vh, 520px);
+      box-shadow: none;
     }
 
-    @media (max-width: 980px) {
-      .slider {
-        aspect-ratio: 16 / 10;
-      }
+    .hero__screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.9s ease-in-out;
+      opacity: 0.6;
+      filter: none;
     }
 
-    .slide {
-      position: absolute;
-      inset: 0;
+    .hero__screen img.is-fading {
       opacity: 0;
-      transform: scale(1.03);
-      transition: opacity 900ms ease, transform 1100ms ease;
-      background-position: center;
-      background-size: cover;
-    }
-
-    .slide.is-active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .slider::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(500px 260px at 30% 20%, rgba(28, 199, 255, 0.25), transparent 55%),
-        radial-gradient(640px 360px at 85% 80%, rgba(47, 107, 255, 0.25), transparent 60%),
-        linear-gradient(180deg, rgba(6, 14, 38, 0.35), rgba(6, 14, 38, 0.52));
-      mix-blend-mode: overlay;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .slider::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 -90px 120px rgba(0, 0, 0, 0.28);
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    .dots {
-      position: absolute;
-      left: 18px;
-      bottom: 14px;
-      display: flex;
-      gap: 8px;
-      z-index: 10;
-    }
-
-    .dotBtn {
-      width: 26px;
-      height: 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.1);
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .dotBtn.is-active {
-      background: linear-gradient(135deg, rgba(47, 107, 255, 0.95), rgba(28, 199, 255, 0.65));
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 8px 22px rgba(47, 107, 255, 0.25);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .slide {
-        transition: none;
-      }
     }
 
     .hero__note {
@@ -877,15 +816,8 @@
           </div>
         </div>
         <div class="hero__media">
-          <div class="slider" role="group" aria-label="메인 이미지 슬라이더">
-            <div class="slide is-active" data-i="0" style="background-image:url('assets/1.jpg');" aria-label="전시 박람회 장면"></div>
-            <div class="slide" data-i="1" style="background-image:url('assets/f2.png');" aria-label="컨퍼런스 장면"></div>
-            <div class="slide" data-i="2" style="background-image:url('assets/f3.png');" aria-label="LED 쇼케이스 장면"></div>
-            <div class="dots" aria-label="슬라이드 선택">
-              <button class="dotBtn is-active" type="button" aria-label="슬라이드 1"></button>
-              <button class="dotBtn" type="button" aria-label="슬라이드 2"></button>
-              <button class="dotBtn" type="button" aria-label="슬라이드 3"></button>
-            </div>
+          <div class="hero__screen">
+            <img id="heroImage" src="assets/f21.png" alt="LED 렌탈 메인 비주얼" />
           </div>
         </div>
       </div>
@@ -1286,8 +1218,27 @@
     const adminPanel = document.getElementById("adminPanel");
     const adminHint = document.getElementById("adminHint");
     const boardList = document.getElementById("boardList");
+    const heroImage = document.getElementById("heroImage");
 
     const ADMIN_TOKEN_KEY = "oneoff_admin_token";
+    const heroImages = ["assets/f21.png", "assets/f32.png"];
+    let heroIndex = 0;
+
+    function rotateHeroImage() {
+      if (!heroImage) return;
+      const nextIndex = (heroIndex + 1) % heroImages.length;
+      const nextSrc = heroImages[nextIndex];
+      const preloader = new Image();
+      preloader.onload = () => {
+        heroImage.classList.add("is-fading");
+        setTimeout(() => {
+          heroImage.src = nextSrc;
+          heroImage.classList.remove("is-fading");
+          heroIndex = nextIndex;
+        }, 450);
+      };
+      preloader.src = nextSrc;
+    }
 
     function getToken() {
       return localStorage.getItem(ADMIN_TOKEN_KEY);
@@ -1407,46 +1358,9 @@
       });
     }
 
-    (function () {
-      const root = document.querySelector(".slider");
-      if (!root) return;
-
-      const slides = Array.from(root.querySelectorAll(".slide"));
-      const dots = Array.from(root.querySelectorAll(".dotBtn"));
-
-      let idx = 0;
-      let timer = null;
-      const INTERVAL_MS = 4500;
-
-      function setActive(next) {
-        idx = (next + slides.length) % slides.length;
-        slides.forEach((s, i) => s.classList.toggle("is-active", i === idx));
-        dots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
-      }
-
-      function start() {
-        stop();
-        timer = setInterval(() => setActive(idx + 1), INTERVAL_MS);
-      }
-
-      function stop() {
-        if (timer) clearInterval(timer);
-        timer = null;
-      }
-
-      dots.forEach((btn, i) => {
-        btn.addEventListener("click", () => {
-          setActive(i);
-          start();
-        });
-      });
-
-      root.addEventListener("mouseenter", stop);
-      root.addEventListener("mouseleave", start);
-
-      setActive(0);
-      start();
-    })();
+    if (heroImage && heroImages.length > 1) {
+      setInterval(rotateHeroImage, 4500);
+    }
 
     (async () => {
       if (getToken() && adminPanel) {
