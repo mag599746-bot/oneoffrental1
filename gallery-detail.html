@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ONEOFF | Gallery Detail</title>
+  <meta name="description" content="ONEOFF LED 렌탈 갤러리 상세 페이지. 제품/사례 상세 정보와 이미지를 확인하세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple-950: #0b1e5b;
+      --purple-900: #0b1e5b;
+      --purple-800: #14318a;
+      --purple-700: #1d4ed8;
+      --purple-600: #2563eb;
+      --purple-500: #3b82f6;
+      --yellow-500: #1d4ed8;
+      --yellow-400: #60a5fa;
+      --yellow-300: #bfdbfe;
+      --ink: #0f172a;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+      --shadow-soft: 0 16px 34px rgba(15, 23, 42, 0.14);
+      --font-display: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      --font-body: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(900px 420px at 20% -10%, rgba(29, 78, 216, 0.14), transparent 60%),
+        radial-gradient(700px 360px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%),
+        linear-gradient(180deg, #eef4ff 0%, #ffffff 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1100px, 100% - 48px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 30, 91, 0.98);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      color: #fff;
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 24px;
+      flex-wrap: wrap;
+    }
+
+    .logo img {
+      width: 150px;
+      height: auto;
+      display: block;
+    }
+
+    .header__actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+    }
+
+    .page {
+      padding: 56px 0 86px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 12px;
+      color: var(--yellow-400);
+      margin: 0;
+    }
+
+    .hero {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4vw, 56px);
+      margin: 0;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 72ch;
+      color: rgba(15, 23, 42, 0.65);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid rgba(29, 78, 216, 0.18);
+      border-radius: 22px;
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .media {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .media__main {
+      width: 100%;
+      height: min(520px, 58vh);
+      object-fit: contain;
+      background: #f1f5ff;
+      border-radius: 16px;
+      border: 1px solid rgba(29, 78, 216, 0.16);
+    }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .thumb {
+      border: 1px solid rgba(29, 78, 216, 0.18);
+      border-radius: 14px;
+      padding: 10px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .thumb:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(29, 78, 216, 0.16);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      background: #f1f5ff;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .thumb span {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(15, 23, 42, 0.7);
+    }
+
+    .meta {
+      padding: 18px 18px 8px;
+    }
+
+    .meta h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .meta dl {
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(29, 78, 216, 0.14);
+      background: rgba(29, 78, 216, 0.05);
+    }
+
+    .meta dt {
+      font-weight: 900;
+      color: rgba(15, 23, 42, 0.72);
+      font-size: 13px;
+    }
+
+    .meta dd {
+      margin: 0;
+      font-weight: 700;
+      color: rgba(15, 23, 42, 0.86);
+      word-break: keep-all;
+    }
+
+    .note {
+      padding: 0 18px 18px;
+      color: rgba(15, 23, 42, 0.55);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .error {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(239, 68, 68, 0.22);
+      background: rgba(239, 68, 68, 0.06);
+      color: rgba(127, 29, 29, 0.92);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header__inner">
+      <a class="logo" href="index.html" aria-label="ONEOFF 홈">
+        <img src="assets/NEWLOGO2.png" alt="ONEOFF" />
+      </a>
+      <div class="header__actions">
+        <a class="btn" href="gallery.html">갤러리로</a>
+        <a class="btn" href="index.html">홈</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="hero" aria-live="polite">
+        <p class="eyebrow" data-detail-category>GALLERY DETAIL</p>
+        <h1 data-detail-title>상세 페이지</h1>
+        <p data-detail-desc>선택한 항목의 상세 정보와 샘플 이미지를 확인하세요.</p>
+      </div>
+
+      <div class="layout" data-detail-layout hidden>
+        <section class="panel media" aria-label="상세 이미지">
+          <img class="media__main" data-detail-main alt="" />
+          <div class="thumbs" data-detail-thumbs></div>
+        </section>
+
+        <aside class="panel" aria-label="상세 정보">
+          <div class="meta">
+            <h2>기본 정보</h2>
+            <dl>
+              <div class="meta-row">
+                <dt>일자</dt>
+                <dd data-field="date">-</dd>
+              </div>
+              <div class="meta-row">
+                <dt>장소</dt>
+                <dd data-field="location">-</dd>
+              </div>
+              <div class="meta-row">
+                <dt>주관</dt>
+                <dd data-field="organizer">-</dd>
+              </div>
+              <div class="meta-row">
+                <dt>주최</dt>
+                <dd data-field="host">-</dd>
+              </div>
+              <div class="meta-row">
+                <dt>렌탈물품</dt>
+                <dd data-field="items">-</dd>
+              </div>
+            </dl>
+          </div>
+          <p class="note">샘플 이미지를 클릭하면 상단 대표 이미지가 변경됩니다.</p>
+        </aside>
+      </div>
+
+      <div class="error" data-detail-error hidden></div>
+    </div>
+  </main>
+
+  <script type="text/plain" id="gallery-inline-data">
+category,type,event,date,location,organizer,host,items,image,detail
+LED WALL,대표시안,세계지식포럼 2025 with APEC 경북 (WKF 2025 with APEC Gyeongbuk),2025.09.09~11,더케이호텔 경주,,,LED WALL 4000*2500,assets/led-wall-02.jpg,
+LED WALL,실사용,LED WALL 대표 시안,2005-08-15,경기아트센터 대극장,,경기도,LED WALL 4000*2500,assets/led-wall-01.jpg,
+LED WALL,실사용,2025 수산양식박람회,2025.11.07~09,aT센터 제 1전시장.,,,LED WALL 4000*2500,assets/led-wall-03.jpg,
+LED WALL,실사용,성매매집결지 공간 전환 비전-연풍 리본(Re:born) 선포식,2025.12.17,파주문화회관 대강당,,,LED WALL 4000*2500,assets/led-wall-04.jpg,
+LED WALL,실사용,사상 최대 외래관광객 유치 기념 행사,2025.12.23,인천공항2터미널,,,LED WALL 4000*2500,assets/led-wall-05.jpg,
+LED WALL,실사용,광복 80주년 광복절 경축식 ,2025.08.15,경기아트센터 대극장,,경기도,LED WALL 4000*2500,assets/led-wall-01.jpg,
+LED 인포데스크,대표시안,LED 인포데스크 대표 시안,2025-01-02,코엑스 B홀,운영팀,브랜드 A,LED 인포데스크,assets/led-info-01.png,
+LED 인포데스크,대표시안,LED 인포데스크 (샘플 제품),-,W1000 D1000 H2000,-,-,LED 인포데스크,assets/led-info-01.png,infodesk-1000-1000-2000
+LED 인포데스크,실사용,LED 인포데스크,2024-08-22,코엑스 B홀,운영팀,브랜드 A,LED 인포데스크,assets/led-info-02.png,
+LED 인포데스크,실사용,LED 인포데스크,2024-09-10,킨텍스 2전시장,기획팀,브랜드 B,LED 인포데스크,assets/led-info-03.png,
+LED 인포데스크,실사용,LED 인포데스크,2024-10-19,벡스코,대행사,브랜드 C,LED 인포데스크,assets/led-info-04.png,
+LED 인포데스크,실사용,LED 인포데스크,2024-11-08,세텍,행사팀,브랜드 D,LED 인포데스크,assets/led-info-05.png,
+LED 인포데스크,실사용,LED 인포데스크,2024-12-02,대구 엑스코,운영팀,브랜드 E,LED 인포데스크,assets/led-info-06.png,
+LED 배너,대표시안,LED 배너 대표 시안,2025-01-03,코엑스 C홀,운영팀,브랜드 A,LED 배너,assets/led-banner-01.png,
+LED 배너,실사용,LED 배너,2024-07-18,세텍,운영팀,브랜드 A,LED 배너,assets/led-banner-02.png,
+LED 배너,실사용,LED 배너,2024-08-05,코엑스 C홀,기획팀,브랜드 B,LED 배너,assets/led-banner-03.png,
+LED 배너,실사용,LED 배너,2024-09-29,킨텍스,대행사,브랜드 C,LED 배너,assets/led-banner-04.png,
+LED 배너,실사용,LED 배너,2024-10-14,부산 벡스코,행사팀,브랜드 D,LED 배너,assets/led-banner-01.png,
+LED 배너,실사용,LED 배너,2024-11-26,서울 양재 AT센터,운영팀,브랜드 E,LED 배너,assets/led-banner-02.png,
+LED 배너,실사용,LED 배너 신규 이미지,2026-01-24,-,,,LED 배너,assets/led-banner-05.png,
+Custom LED,대표시안,Custom LED 대표 시안,2025-01-04,대전컨벤션센터,운영팀,브랜드 A,Custom LED,assets/custom-led-01.png,
+Custom LED,실사용,Custom LED,2024-06-12,대전컨벤션센터,운영팀,브랜드 A,Custom LED,assets/custom-led-02.png,
+Custom LED,실사용,Custom LED,2024-07-03,코엑스 A홀,기획팀,브랜드 B,Custom LED,assets/custom-led-01.png,
+Custom LED,실사용,Custom LED,2024-08-17,부산 벡스코,대행사,브랜드 C,Custom LED,assets/custom-led-02.png,
+Custom LED,실사용,Custom LED,2024-09-06,킨텍스,행사팀,브랜드 D,Custom LED,assets/custom-led-01.png,
+Custom LED,실사용,Custom LED,2024-10-21,세텍,운영팀,브랜드 E,Custom LED,assets/custom-led-02.png,
+  </script>
+
+  <script>
+    const titleEl = document.querySelector("[data-detail-title]");
+    const categoryEl = document.querySelector("[data-detail-category]");
+    const descEl = document.querySelector("[data-detail-desc]");
+    const layoutEl = document.querySelector("[data-detail-layout]");
+    const errorEl = document.querySelector("[data-detail-error]");
+    const mainImgEl = document.querySelector("[data-detail-main]");
+    const thumbsEl = document.querySelector("[data-detail-thumbs]");
+    const inlineDataTag = document.getElementById("gallery-inline-data");
+
+    const fields = {
+      date: document.querySelector('[data-field="date"]'),
+      location: document.querySelector('[data-field="location"]'),
+      organizer: document.querySelector('[data-field="organizer"]'),
+      host: document.querySelector('[data-field="host"]'),
+      items: document.querySelector('[data-field="items"]')
+    };
+
+    const parseCsv = (text) => {
+      const rows = [];
+      let current = "";
+      let inQuotes = false;
+      let row = [];
+
+      const pushCell = () => {
+        row.push(current);
+        current = "";
+      };
+
+      const pushRow = () => {
+        if (row.length > 0) {
+          rows.push(row);
+        }
+        row = [];
+      };
+
+      const normalized = String(text || "").replace(/^\uFEFF/, "");
+
+      for (let i = 0; i < normalized.length; i += 1) {
+        const char = normalized[i];
+        if (char === '"') {
+          if (inQuotes && normalized[i + 1] === '"') {
+            current += '"';
+            i += 1;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === "," && !inQuotes) {
+          pushCell();
+        } else if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (char === "\r" && normalized[i + 1] === "\n") {
+            i += 1;
+          }
+          pushCell();
+          pushRow();
+        } else {
+          current += char;
+        }
+      }
+
+      if (current.length || row.length) {
+        pushCell();
+        pushRow();
+      }
+
+      const [headers, ...data] = rows;
+      if (!headers) {
+        return [];
+      }
+
+      return data.map((values) => {
+        const entry = {};
+        headers.forEach((header, index) => {
+          entry[String(header || "").trim()] = String(values[index] || "").trim();
+        });
+        return entry;
+      });
+    };
+
+    const getInlineCsv = () => (inlineDataTag ? inlineDataTag.textContent.trim() : "");
+
+    const loadCsv = async () => {
+      const inlineCsv = getInlineCsv();
+      try {
+        const response = await fetch("gallery-data.csv", { cache: "no-store" });
+        if (response.ok) {
+          return { text: await response.text(), source: "file" };
+        }
+      } catch (error) {
+        console.warn("CSV fetch failed, using inline data.", error);
+      }
+      if (inlineCsv) {
+        return { text: inlineCsv, source: "inline" };
+      }
+      throw new Error("CSV load failed");
+    };
+
+    const setError = (message) => {
+      layoutEl.hidden = true;
+      errorEl.hidden = false;
+      errorEl.textContent = message;
+    };
+
+    const setMeta = (row) => {
+      fields.date.textContent = row.date || "-";
+      fields.location.textContent = row.location || "-";
+      fields.organizer.textContent = row.organizer || "-";
+      fields.host.textContent = row.host || "-";
+      fields.items.textContent = row.items || "-";
+    };
+
+    const renderThumbs = (images) => {
+      thumbsEl.innerHTML = "";
+      images.forEach((src, idx) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "thumb";
+        button.innerHTML = `
+          <img alt="샘플 이미지 ${idx + 1}" />
+          <span>샘플 ${idx + 1}</span>
+        `;
+        const img = button.querySelector("img");
+        img.src = src;
+        button.addEventListener("click", () => {
+          mainImgEl.src = src;
+        });
+        thumbsEl.appendChild(button);
+      });
+    };
+
+    const detailImages = {
+      "infodesk-1000-1000-2000": [
+        "assets/led-info-01.png",
+        "assets/led-info-02.png",
+        "assets/led-info-03.png"
+      ]
+    };
+
+    const init = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const detailKey = (params.get("detail") || "").trim();
+      if (!detailKey) {
+        setError("상세 페이지 ID(detail)가 없습니다. 갤러리에서 다시 선택해 주세요.");
+        return;
+      }
+
+      const result = await loadCsv();
+      const rows = parseCsv(result.text);
+      const row = rows.find((r) => (r.detail || "").trim() === detailKey);
+      if (!row) {
+        setError(`해당 상세 항목을 찾지 못했습니다: ${detailKey}`);
+        return;
+      }
+
+      const images = detailImages[detailKey] || (row.image ? [row.image] : []);
+      const normalizedImages = images.filter(Boolean).slice(0, 3);
+      if (!normalizedImages.length) {
+        setError("이미지 정보를 찾지 못했습니다. CSV의 image/detail 값을 확인해 주세요.");
+        return;
+      }
+
+      categoryEl.textContent = row.category || "GALLERY DETAIL";
+      titleEl.textContent = row.event || "상세 페이지";
+      descEl.textContent = row.items ? `렌탈물품: ${row.items}` : "선택한 항목의 상세 정보와 샘플 이미지를 확인하세요.";
+      setMeta(row);
+
+      mainImgEl.src = normalizedImages[0];
+      mainImgEl.alt = row.event || "상세 이미지";
+      renderThumbs(normalizedImages);
+
+      errorEl.hidden = true;
+      layoutEl.hidden = false;
+    };
+
+    init().catch(() => {
+      setError("상세 데이터를 불러오지 못했습니다. gallery-data.csv 또는 내장 데이터를 확인해 주세요.");
+    });
+  </script>
+</body>
+</html>
+
